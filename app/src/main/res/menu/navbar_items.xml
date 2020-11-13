@@ -12,7 +12,7 @@
         android:title="Calendar" />
 
     <item
-        android:id="@+id/navbar_pomo"
+        android:id="@+id/navbar_pomodoro"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="Pomodoro" />
 

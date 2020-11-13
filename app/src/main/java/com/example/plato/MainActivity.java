@@ -28,19 +28,23 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
 
                     case R.id.navbar_cards:
+                        openFragment(new Flashcards());
                         return true;
 
                     case R.id.navbar_calendar:
                         openFragment(new Calendar());
                         return true;
 
-                    case R.id.navbar_pomo:
+                    case R.id.navbar_pomodoro:
+                        openFragment(new Pomodoro());
                         return true;
 
                     case R.id.navbar_notes:
+                        openFragment(new Notes());
                         return true;
 
                     case R.id.navbar_noise:
+                        openFragment(new Noise());
                         return true;
                 }
                 return false;
