@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navbar_cards"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Cards" />
+
+    <item
+        android:id="@+id/navbar_calendar"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Calendar" />
+
+    <item
+        android:id="@+id/navbar_pomo"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Pomodoro" />
+
+    <item
+        android:id="@+id/navbar_notes"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Notes" />
+
+    <item
+        android:id="@+id/navbar_noise"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Noise" />
+
+</menu>
