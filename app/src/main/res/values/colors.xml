@@ -11,7 +11,7 @@
     <!--Notes Page-->
     <color name="colorPrimary">#292929</color>
     <color name="colorPrimaryDark">#292929</color>
-    <color name="colorAccent">#C9FBC0</color>
+    <color name="colorAccent">#009688</color>
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorSearchIcon">#DBDBDB</color>
