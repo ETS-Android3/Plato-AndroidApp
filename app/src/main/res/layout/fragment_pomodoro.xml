@@ -11,9 +11,9 @@
     <ImageView
         android:id="@+id/imageView"
         android:contentDescription="Logo at the top"
-        android:layout_width="391dp"
+        android:layout_width="match_parent"
         android:layout_height="122dp"
-        android:src="@drawable/plato_2"
+        android:src="@drawable/background_search"
         tools:layout_editor_absoluteX="9dp"
         tools:layout_editor_absoluteY="-3dp" />
 
