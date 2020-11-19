@@ -63,15 +63,13 @@ public class CreateNoteActivity extends AppCompatActivity {
             Toast.makeText(this, "Note title can't be empty!",Toast.LENGTH_SHORT).show();
             return;
         }
-//        else if (inputNoteSubtitle.getText().toString().trim().isEmpty()
-//                && inputNoteText.getText().toString().trim().isEmpty()) {
-//            Toast.makeText(this,"Note can't be empty!", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
+        else if (inputNoteText.getText().toString().trim().isEmpty()) {
+            Toast.makeText(this,"Note can't be empty!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         final Note note = new Note();
         note.setTitle(inputNoteTitle.getText().toString());
-//        note.setSubtitle(inputNoteSubtitle.getText().toString());
         note.setNoteText(inputNoteText.getText().toString());
         note.setDatetime(textDateTime.getText().toString());
 
