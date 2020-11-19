@@ -13,7 +13,7 @@
         android:contentDescription="Logo at the top"
         android:layout_width="match_parent"
         android:layout_height="122dp"
-        android:src="@drawable/background_search"
+        android:src="@drawable/plato_2"
         tools:layout_editor_absoluteX="9dp"
         tools:layout_editor_absoluteY="-3dp" />
 
