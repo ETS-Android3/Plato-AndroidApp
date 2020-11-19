@@ -3,27 +3,27 @@
 
     <item
         android:id="@+id/navbar_cards"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/icon_flashcard"
         android:title="Cards" />
 
     <item
         android:id="@+id/navbar_calendar"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/icon_calendar"
         android:title="Calendar" />
 
     <item
-        android:id="@+id/navbar_pomodoro"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Pomodoro" />
-
-    <item
         android:id="@+id/navbar_notes"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/icon_note"
         android:title="Notes" />
 
     <item
+        android:id="@+id/navbar_pomodoro"
+        android:icon="@drawable/icon_timer"
+        android:title="Pomo" />
+
+    <item
         android:id="@+id/navbar_noise"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/icon_music"
         android:title="Noise" />
 
 </menu>
