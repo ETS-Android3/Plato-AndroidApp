@@ -1,14 +1,25 @@
-package com.example.plato;
+package com.example.plato.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.example.plato.R;
+import com.example.plato.database.NotesDatabase;
+import com.example.plato.entities.Note;
+
+import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,6 +68,8 @@ public class Notes extends Fragment{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        getNotes();
     }
 
     @Override
@@ -78,4 +91,29 @@ public class Notes extends Fragment{
 
         return v;
     }
+
+
+    private void getNotes(){
+        @SuppressLint("StaticFieldLeak")
+        class GetNotesTask extends AsyncTask<Void, Void, List<Note>> {
+
+            @Override
+            protected List<Note> doInBackground(Void... voids){
+                return NotesDatabase
+                        .getDatabase(requireActivity().getApplicationContext())
+                        .noteDao().getAllNotes();
+            }
+
+            @Override
+            protected void onPostExecute(List<Note> notes){
+                super.onPostExecute(notes);
+
+                Log.d("MY_NOTES", notes.toString());
+            }
+        }
+        new GetNotesTask().execute();
+    }
+
+
+
 }
