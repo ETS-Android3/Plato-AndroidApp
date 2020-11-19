@@ -34,9 +34,7 @@ public class MainActivity extends AppCompatActivity {
         navbar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                 switch (item.getItemId()){
-
                     case R.id.navbar_cards:
                         openFragment(new Flashcards());
                         return true;
@@ -60,10 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        ArrayList<TaskItem> exampleList = new ArrayList<>();
-        exampleList.add(new TaskItem(R.drawable.ic_baseline_event_note_24, "Title 1", "Date 1"));
-        exampleList.add(new TaskItem(R.drawable.ic_baseline_event_note_24, "Title 2", "Date 2"));
-        exampleList.add(new TaskItem(R.drawable.ic_baseline_event_note_24, "Title 3", "Date 3"));
     }
     void openFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
