@@ -7,7 +7,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Notes Page-->
-    <string name="notes_title">My Notes</string>
+    <string name="notes_title">Note Title</string>
     <string name="my_notes">Notes</string>
     <string name="search_notes">Search Notes</string>
+    <string name="type_note_title">Type note here...</string>
 </resources>
