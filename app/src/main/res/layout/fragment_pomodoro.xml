@@ -41,6 +41,27 @@
         android:textStyle="bold"
         tools:layout_editor_absoluteX="56dp"
         tools:layout_editor_absoluteY="28dp" />
+
+    <!--    Timer Code begins here-->
+    <TextView
+        android:id="@+id/countdown_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="300dp"
+        tools:text="25:00"
+        android:textColor="#F0F6F0"
+        android:textSize="60sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="400dp"
+        android:text="Start" />
+
 </FrameLayout>
 
 
