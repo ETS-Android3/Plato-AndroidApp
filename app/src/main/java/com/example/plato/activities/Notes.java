@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +17,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.plato.R;
+import com.example.plato.adapters.NotesAdapter;
 import com.example.plato.database.NotesDatabase;
 import com.example.plato.entities.Note;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,6 +33,11 @@ import java.util.Objects;
 public class Notes extends Fragment{
 
     public static final int REQUEST_CODE_ADD_NOTE = 1;
+
+    private RecyclerView notesRecyclerView;
+    private List<Note> noteList;
+    private NotesAdapter notesAdapter;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,6 +86,7 @@ public class Notes extends Fragment{
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_notes, container, false);
+//        View v1 = inflater.inflate(R.layout.item_container_note, container, false);
 
         ImageView imageAddNoteMain = v.findViewById(R.id.imageAddNoteMain);
         imageAddNoteMain.setOnClickListener(new View.OnClickListener(){
@@ -89,9 +99,22 @@ public class Notes extends Fragment{
             }
         });
 
+        //get a reference to recyclerView
+        notesRecyclerView = v.findViewById(R.id.notesRecyclerView);
+
+        //set layoutManager
+        notesRecyclerView.setLayoutManager(
+                new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+        );
+
+        //This is the data from recyclerView
+        noteList = new ArrayList<>();
+        notesAdapter = new NotesAdapter(noteList);
+        notesRecyclerView.setAdapter(notesAdapter);
+
+
         return v;
     }
-
 
     private void getNotes(){
         @SuppressLint("StaticFieldLeak")
@@ -108,6 +131,14 @@ public class Notes extends Fragment{
             protected void onPostExecute(List<Note> notes){
                 super.onPostExecute(notes);
 
+                if(noteList.size() == 0){
+                    noteList.addAll(notes);
+                    notesAdapter.notifyDataSetChanged();
+                }else{
+                    noteList.add(0,notes.get(0));
+                    notesAdapter.notifyItemInserted(0);
+                }
+                notesRecyclerView.smoothScrollToPosition(0);
                 Log.d("MY_NOTES", notes.toString());
             }
         }

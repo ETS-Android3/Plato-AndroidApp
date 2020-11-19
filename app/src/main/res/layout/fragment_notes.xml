@@ -5,9 +5,10 @@
     android:id="@+id/notesContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Notes">
+    tools:context=".activities.Notes">
 
     <LinearLayout
+        android:id="@+id/noteLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
@@ -26,11 +27,11 @@
             android:text="@string/my_notes"
             android:textColor="@color/colorDefaultNoteColor"
             android:textSize="36sp"
-            app:fontFamily="sans-serif-condensed-medium"
+            app:fontFamily="@font/ubuntu_bold"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/add"
+            android:id="@+id/imageAddNoteMain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/notes_title"
@@ -81,13 +82,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notesRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="575dp"
         android:layout_marginStart="4dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginTop="158dp"
+        android:layout_marginEnd="4dp"
         android:clipToPadding="false"
-        app:paddingStart="0dp"
-        app:paddingEnd="12dp"
-        app:paddingBottom="12dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="16dp"
         app:layout_constraintBottom_toTopOf="@id/navbar"
         app:layout_constraintTop_toBottomOf="@id/layoutSearch" />
+
 </FrameLayout>
