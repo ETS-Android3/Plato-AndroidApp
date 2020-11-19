@@ -65,7 +65,7 @@ public class Notes extends Fragment{
 
         View v = inflater.inflate(R.layout.fragment_notes, container, false);
 
-        ImageView imageAddNoteMain = v.findViewById(R.id.imageAddNoteMain);
+        ImageView imageAddNoteMain = v.findViewById(R.id.add);
         imageAddNoteMain.setOnClickListener(new View.OnClickListener(){
 
             @Override
