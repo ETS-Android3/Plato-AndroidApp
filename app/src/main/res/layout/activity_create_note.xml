@@ -16,7 +16,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:animateLayoutChanges="true">
 
             <ImageView
@@ -60,15 +60,27 @@
                 android:importantForAutofill="no"
                 android:includeFontPadding="false"
                 android:inputType="text"
-                android:textColor="@color/colorAccent"
-                android:textSize="30dp"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textSize="30sp"
                 app:layout_constraintTop_toBottomOf="@id/imageBack" />
+
+            <View
+                android:id="@+id/viewSubtitleIndicator"
+                android:layout_width="7dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/background_subtitle_indicator"
+                app:layout_constraintTop_toBottomOf="@id/imageBack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/inputNoteTitle" />
 
             <TextView
                 android:id="@+id/textDateTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ubuntu_regular"
+                android:textColor="@color/colorWhite"
                 android:includeFontPadding="false"
                 app:layout_constraintEnd_toEndOf="@id/inputNoteTitle"
                 app:layout_constraintStart_toStartOf="@id/inputNoteTitle"
@@ -90,14 +102,18 @@
                 android:includeFontPadding="false"
                 android:inputType="textMultiLine"
                 android:minHeight="100dp"
-                android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textColor="@color/text_container_display"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textDateTime"
                 />
 
 
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <include layout="@layout/layout_miscellaneous"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

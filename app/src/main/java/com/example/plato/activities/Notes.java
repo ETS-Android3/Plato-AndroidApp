@@ -67,6 +67,7 @@ public class Notes extends Fragment{
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -104,14 +105,13 @@ public class Notes extends Fragment{
 
         //set layoutManager
         notesRecyclerView.setLayoutManager(
-                new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         );
 
         //This is the data from recyclerView
         noteList = new ArrayList<>();
         notesAdapter = new NotesAdapter(noteList);
         notesRecyclerView.setAdapter(notesAdapter);
-
 
         return v;
     }

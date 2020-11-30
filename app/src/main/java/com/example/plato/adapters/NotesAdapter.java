@@ -1,8 +1,11 @@
 package com.example.plato.adapters;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,13 +55,14 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
     static class NoteViewHolder extends RecyclerView.ViewHolder{
 
         TextView textTitle, textNotes, textDateTime;
+        LinearLayout layoutNote;
 
         NoteViewHolder(@NonNull View itemView) {
             super(itemView);
             textTitle = itemView.findViewById(R.id.textTitle);
             textNotes = itemView.findViewById(R.id.textNotes);
             textDateTime = itemView.findViewById(R.id.textDateTime);
-
+            layoutNote = itemView.findViewById(R.id.layoutNote);
         }
 
         void setNote(Note note){
@@ -69,6 +73,13 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
                 textNotes.setText(note.getNoteText());
             }
             textDateTime.setText(note.getDatetime());
+
+            GradientDrawable gradientDrawable = (GradientDrawable) layoutNote.getBackground();
+            if(note.getColor() != null){
+                gradientDrawable.setColor(Color.parseColor(note.getColor()));
+            } else{
+                gradientDrawable.setColor(Color.parseColor("#AFAFAF"));
+            }
         }
     }
 }
