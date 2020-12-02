@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Notes#newInstance} factory method to
@@ -36,6 +38,8 @@ public class Notes extends Fragment implements NotesListener {
     public static final int REQUEST_CODE_ADD_NOTE = 1;
     //request code used to update note
     public static final int REQUEST_CODE_UPDATE_NOTE = 2;
+    //request to display all notes
+    public static final int REQUEST_CODE_SHOW_NOTE = 3;
 
 
     private RecyclerView notesRecyclerView;
@@ -84,7 +88,7 @@ public class Notes extends Fragment implements NotesListener {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        getNotes();
+        getNotes(REQUEST_CODE_SHOW_NOTE);
     }
 
     @Override
@@ -131,7 +135,7 @@ public class Notes extends Fragment implements NotesListener {
         startActivityForResult(intent, REQUEST_CODE_UPDATE_NOTE);
     }
 
-    private void getNotes(){
+    private void getNotes(final int requestCode){
         @SuppressLint("StaticFieldLeak")
         class GetNotesTask extends AsyncTask<Void, Void, List<Note>> {
 
@@ -146,17 +150,42 @@ public class Notes extends Fragment implements NotesListener {
             protected void onPostExecute(List<Note> notes){
                 super.onPostExecute(notes);
 
-                if(noteList.size() == 0){
+                if(requestCode == REQUEST_CODE_SHOW_NOTE){
                     noteList.addAll(notes);
                     notesAdapter.notifyDataSetChanged();
-                }else{
+                }else if (requestCode == REQUEST_CODE_ADD_NOTE){
                     noteList.add(0,notes.get(0));
                     notesAdapter.notifyItemInserted(0);
+                    notesRecyclerView.smoothScrollToPosition(0);
+                }else if (requestCode == REQUEST_CODE_UPDATE_NOTE){
+                    noteList.remove(noteClickedPosition);
+                    noteList.add(noteClickedPosition, notes.get(noteClickedPosition));
+                    notesAdapter.notifyItemChanged(noteClickedPosition);
                 }
-                notesRecyclerView.smoothScrollToPosition(0);
-                Log.d("MY_NOTES", notes.toString());
+
+//                if(noteList.size() == 0){
+//                    noteList.addAll(notes);
+//                    notesAdapter.notifyDataSetChanged();
+//                }else{
+//                    noteList.add(0,notes.get(0));
+//                    notesAdapter.notifyItemInserted(0);
+//                }
+//                notesRecyclerView.smoothScrollToPosition(0);
+//                Log.d("MY_NOTES", notes.toString());
             }
         }
         new GetNotesTask().execute();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_ADD_NOTE && resultCode == RESULT_OK){
+            getNotes(REQUEST_CODE_ADD_NOTE);
+        } else if (requestCode == REQUEST_CODE_UPDATE_NOTE && resultCode == RESULT_OK){
+            if (data != null) {
+                getNotes(REQUEST_CODE_UPDATE_NOTE);
+            }
+        }
     }
 }
