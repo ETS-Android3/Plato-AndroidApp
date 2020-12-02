@@ -13,15 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.plato.R;
 import com.example.plato.entities.Note;
+import com.example.plato.listeners.NotesListener;
 
 import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHolder>{
 
     private List<Note> notes;
+    private NotesListener notesListener;
 
-    public NotesAdapter(List<Note> notes) {
+    public NotesAdapter(List<Note> notes, NotesListener notesListener) {
         this.notes = notes;
+        this.notesListener = notesListener;
     }
 
     @NonNull
@@ -39,13 +42,18 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
     @Override
     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
         holder.setNote(notes.get(position));
+        holder.layoutNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notesListener.onNoteClicked(notes.get(position), position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return notes.size();
     }
-
 
     @Override
     public int getItemViewType(int position) {

@@ -20,6 +20,7 @@ import com.example.plato.R;
 import com.example.plato.adapters.NotesAdapter;
 import com.example.plato.database.NotesDatabase;
 import com.example.plato.entities.Note;
+import com.example.plato.listeners.NotesListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +31,18 @@ import java.util.Objects;
  * Use the {@link Notes#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Notes extends Fragment{
-
+public class Notes extends Fragment implements NotesListener {
+    //request code to add a new note
     public static final int REQUEST_CODE_ADD_NOTE = 1;
+    //request code used to update note
+    public static final int REQUEST_CODE_UPDATE_NOTE = 2;
+
 
     private RecyclerView notesRecyclerView;
     private List<Note> noteList;
     private NotesAdapter notesAdapter;
 
+    private int noteClickedPosition = -1;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -110,10 +115,20 @@ public class Notes extends Fragment{
 
         //This is the data from recyclerView
         noteList = new ArrayList<>();
-        notesAdapter = new NotesAdapter(noteList);
+        notesAdapter = new NotesAdapter(noteList, this);
         notesRecyclerView.setAdapter(notesAdapter);
 
         return v;
+    }
+
+    @Override
+    public void onNoteClicked(Note note, int position) {
+        noteClickedPosition = position;
+        //may need to be changed or something here
+        Intent intent = new Intent(requireActivity().getApplicationContext(), CreateNoteActivity.class);
+        intent.putExtra("isViewOrUpdate", true);
+        intent.putExtra("note", note);
+        startActivityForResult(intent, REQUEST_CODE_UPDATE_NOTE);
     }
 
     private void getNotes(){
@@ -144,7 +159,4 @@ public class Notes extends Fragment{
         }
         new GetNotesTask().execute();
     }
-
-
-
 }

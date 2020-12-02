@@ -33,6 +33,8 @@ public class CreateNoteActivity extends AppCompatActivity {
 
     private String selectedNoteColor;
 
+    private Note alreadyAvailableNote;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,8 +70,20 @@ public class CreateNoteActivity extends AppCompatActivity {
 
         selectedNoteColor = "#AFAFAF";
 
+        if(getIntent().getBooleanExtra("isViewOrUpdate",false)){
+            alreadyAvailableNote = (Note) getIntent().getSerializableExtra("note");
+            setViewOrUpdateNote();
+        }
+
         initMiscellaneous();
         setSubtitleIndicatorColor();
+    }
+
+    private void setViewOrUpdateNote(){
+        inputNoteTitle.setText(alreadyAvailableNote.getTitle());
+        inputNoteText.setText(alreadyAvailableNote.getNoteText());
+//        textDateTime.setText(alreadyAvailableNote.getDatetime());
+
     }
 
     private void saveNote(){
@@ -87,6 +101,11 @@ public class CreateNoteActivity extends AppCompatActivity {
         note.setNoteText(inputNoteText.getText().toString());
         note.setDatetime(textDateTime.getText().toString());
         note.setColor(selectedNoteColor);
+
+        //setting id of new note from an already available note.
+        if(alreadyAvailableNote != null){
+            note.setId(alreadyAvailableNote.getId());
+        }
 
         @SuppressLint("StaticFieldLeak")
         class SaveNoteTask extends AsyncTask<Void, Void, Void> {
@@ -199,6 +218,22 @@ public class CreateNoteActivity extends AppCompatActivity {
 
             }
         });
+
+        if(alreadyAvailableNote != null && alreadyAvailableNote.getColor() != null && !alreadyAvailableNote.getColor().trim().isEmpty())
+            switch(alreadyAvailableNote.getColor()){
+                case "#88EC8C":
+                    layoutMiscellaneous.findViewById(R.id.viewColor2).performClick();
+                    break;
+                case "#DC4CAF6D":
+                    layoutMiscellaneous.findViewById(R.id.viewColor3).performClick();
+                    break;
+                case "#A1AE7DEA":
+                    layoutMiscellaneous.findViewById(R.id.viewColor4).performClick();
+                    break;
+                case "#996101DC":
+                    layoutMiscellaneous.findViewById(R.id.viewColor5).performClick();
+                    break;
+            }
     }
 
     private void setSubtitleIndicatorColor() {
