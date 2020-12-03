@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutMiscellaneous"
     android:orientation="vertical"
-    android:background="@drawable/background_miscellaneous"
+    android:background="@drawable/background_dialog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:behavior_peekHeight="40dp"
@@ -17,7 +18,7 @@
         android:gravity="center"
         android:includeFontPadding="false"
         android:text="@string/miscellaneous"
-        android:textColor="@color/black"
+        android:textColor="@color/colorWhite"
         android:textSize="15sp"/>
 
     <LinearLayout
@@ -139,8 +140,39 @@
             android:fontFamily="@font/ubuntu_medium"
             android:includeFontPadding="false"
             android:text="@string/pick_color"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15sp" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutDeleteNote"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_delete"
+            app:tint="@color/colorWhite" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/ubuntu_medium"
+            android:includeFontPadding="false"
+            android:text="@string/delete_note"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>
