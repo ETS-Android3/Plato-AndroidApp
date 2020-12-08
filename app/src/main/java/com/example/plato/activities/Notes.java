@@ -10,10 +10,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.plato.R;
@@ -89,6 +92,7 @@ public class Notes extends Fragment implements NotesListener {
         }
 
         getNotes(REQUEST_CODE_SHOW_NOTE, false);
+
     }
 
     @Override
@@ -121,6 +125,27 @@ public class Notes extends Fragment implements NotesListener {
         noteList = new ArrayList<>();
         notesAdapter = new NotesAdapter(noteList, this);
         notesRecyclerView.setAdapter(notesAdapter);
+
+        //search bar
+        EditText inputSearch = v.findViewById(R.id.inputSearch);
+        inputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                notesAdapter.cancelTimer();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(noteList.size() != 0 ){
+                    notesAdapter.searchNotes(s.toString());
+                }
+            }
+        });
 
         return v;
     }
