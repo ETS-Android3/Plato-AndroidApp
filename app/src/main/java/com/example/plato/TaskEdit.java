@@ -4,28 +4,21 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Calendar#newInstance} factory method to
+ * Use the {@link TaskEdit#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Calendar extends Fragment {
-
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+public class TaskEdit extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,7 +29,7 @@ public class Calendar extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Calendar() {
+    public TaskEdit() {
         // Required empty public constructor
     }
 
@@ -46,11 +39,11 @@ public class Calendar extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Calendar.
+     * @return A new instance of fragment fragment_calendar_item.
      */
     // TODO: Rename and change types and number of parameters
-    public static Calendar newInstance(String param1, String param2) {
-        Calendar fragment = new Calendar();
+    public static TaskEdit newInstance(String param1, String param2) {
+        TaskEdit fragment = new TaskEdit();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -70,34 +63,28 @@ public class Calendar extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_calendar_taskedit, container, false);
 
-        final FloatingActionButton button = rootView.findViewById(R.id.taskAddButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        final ImageButton backButton = rootView.findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                Fragment fragment = new TaskEdit();
+                Fragment fragment = new Calendar();
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame, fragment).commit();
             }
         });
 
-        ArrayList<TaskItem> exampleList = new ArrayList<>();
-        exampleList.add(new TaskItem(R.drawable.ic_baseline_event_note_24, "Submit Sprint 2", "2:30pm"));
-        exampleList.add(new TaskItem(R.drawable.ic_baseline_event_note_24, "Attend Group Meeting", "4:00pm"));
-        exampleList.add(new TaskItem(R.drawable.ic_baseline_event_note_24, "Read Chapter 4", "10:30pm"));
-        exampleList.add(new TaskItem(R.drawable.ic_baseline_event_note_24, "Submit Discussion 10", "11:59pm"));
-        exampleList.add(new TaskItem(R.drawable.ic_baseline_event_note_24, "Submit Quiz 10", "11:59pm"));
-        exampleList.add(new TaskItem(R.drawable.ic_baseline_event_note_24, "Read Article", "11:59pm"));
-
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.taskList);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new TaskAdapter(exampleList);
-
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-        // Inflate the layout for this fragment
+        final Button submitButton = rootView.findViewById(R.id.submitButton);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                Fragment fragment = new Calendar();
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame, fragment).commit();
+            }
+        });
         return rootView;
     }
 }

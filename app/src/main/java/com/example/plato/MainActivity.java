@@ -24,9 +24,7 @@ public class MainActivity extends AppCompatActivity {
         navbar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                 switch (item.getItemId()){
-
                     case R.id.navbar_cards:
                         openFragment(new Flashcards());
                         return true;
@@ -50,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
     void openFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
