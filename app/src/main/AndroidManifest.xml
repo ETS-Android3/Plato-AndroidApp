@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Plato">
 
-        <activity android:name=".CreateNoteActivity"
+        <activity android:name=".activities.CreateNoteActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
             android:label="@string/app_name"/>
