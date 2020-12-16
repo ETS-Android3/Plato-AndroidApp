@@ -111,7 +111,9 @@ public class Pomodoro extends Fragment {
 
             @Override
             public void onFinish() {
-                countdownText.setText("Timer Ended :D");
+                countdownText.setText("Work time Ended, break starts now :D");
+                updateTimer2();
+
 //                Toast.makeText(getApplicationContext(), "Countdown Timer has ended", Toast.LENGTH_LONG).show();
 
             }
@@ -129,11 +131,21 @@ public class Pomodoro extends Fragment {
 
     public void updateTimer() {
         int mins = (int) (timeLeft / 60000);
-        // int seconds=(int)  mins%60000/1000;
-        String timeLeftText = mins + "mins";
-//        if(seconds<10)
-//            timeLeftText+="0";
-//        timeLeftText+=seconds;
+        int seconds = (int) (timeLeft % 60000) / 1000;
+        String timeLeftText = mins + ":";
+        if (seconds < 10)
+            timeLeftText += "0";
+        timeLeftText += seconds;
+        countdownText.setText(timeLeftText);
+    }
+
+    public void updateTimer2() {
+        int mins = (int) (timeLeft / 60000);
+        int seconds = (int) (timeLeft % 60000) / 1000;
+        String timeLeftText = mins + ":";
+        if (seconds < 10)
+            timeLeftText += "0";
+        timeLeftText += seconds;
         countdownText.setText(timeLeftText);
     }
 }

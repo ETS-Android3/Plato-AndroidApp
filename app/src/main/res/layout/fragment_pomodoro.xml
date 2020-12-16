@@ -5,38 +5,24 @@
     android:id="@+id/pomodoroContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#F8F5F5"
+    android:backgroundTint="#E0E6E6"
     tools:context=".Pomodoro">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:contentDescription="Logo at the top"
-        android:layout_width="match_parent"
-        android:layout_height="122dp"
-        android:src="@drawable/plato_2"
-        tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="-3dp" />
-
-    <Space
-        android:layout_width="410dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="100dp"
-        tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="112dp" />
 
     <TextView
         android:id="@+id/title_new"
-        android:autofillHints="@string/app_name"
-        android:labelFor="@+id/title_new"
         android:layout_width="299dp"
         android:layout_height="80dp"
         android:layout_marginStart="60dp"
         android:layout_marginTop="20dp"
+        android:autofillHints="@string/app_name"
         android:ems="10"
         android:inputType="textPersonName"
+        android:labelFor="@+id/title_new"
         android:text="Pomodoro"
         android:textAllCaps="false"
-        android:textColor="#F0F6F0"
+        android:textColor="#0A0B0A"
         android:textSize="60sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="56dp"
@@ -49,10 +35,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="135dp"
         android:layout_marginTop="300dp"
-        tools:text="25:00"
-        android:textColor="#F0F6F0"
+        android:textColor="#009688"
         android:textSize="60sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="25:00" />
 
     <Button
         android:id="@+id/start_button"
@@ -61,6 +47,12 @@
         android:layout_marginStart="160dp"
         android:layout_marginTop="400dp"
         android:text="Start" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="?android:attr/listDivider" />
 
 </FrameLayout>
 
