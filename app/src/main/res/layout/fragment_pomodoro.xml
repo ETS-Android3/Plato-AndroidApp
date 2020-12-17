@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pomodoroContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F5F5"
-    android:backgroundTint="#E0E6E6"
+    android:background="#E0E6E6"
+    android:backgroundTint="#FFFFFF"
     tools:context=".Pomodoro">
 
 
-    <TextView
-        android:id="@+id/title_new"
-        android:layout_width="299dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="20dp"
-        android:autofillHints="@string/app_name"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:labelFor="@+id/title_new"
-        android:text="Pomodoro"
-        android:textAllCaps="false"
-        android:textColor="#0A0B0A"
-        android:textSize="60sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="28dp" />
-
     <!--    Timer Code begins here-->
+
+    <TextView
+        android:id="@+id/notesText2"
+        android:layout_width="191dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:includeFontPadding="false"
+        android:text="Pomodoro"
+        android:textColor="@color/colorDefaultNoteColor"
+        android:textSize="36sp"
+        app:fontFamily="@font/ubuntu_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/countdown_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="300dp"
+        android:layout_width="293dp"
+        android:layout_height="133dp"
+        android:layout_marginTop="120dp"
+        android:textAlignment="center"
         android:textColor="#009688"
-        android:textSize="60sp"
+        android:textSize="105sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notesText2"
         tools:text="25:00" />
 
     <Button
         android:id="@+id/start_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="400dp"
-        android:text="Start" />
+        android:layout_width="160dp"
+        android:layout_height="77dp"
+        android:text="Start"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/countdown_text"
+        app:layout_constraintVertical_bias="0.187" />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:background="?android:attr/listDivider" />
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 

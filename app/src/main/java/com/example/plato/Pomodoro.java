@@ -31,7 +31,8 @@ public class Pomodoro extends Fragment {
     private TextView countdownText;
     private Button countdownButton;
     private CountDownTimer countDownTimer;
-    private long timeLeft = (60000 * 25);
+    private long timeLeft = (10000);
+//    private long timeLeft = (60000 * 25);
     private boolean isTimerRunning;
 
     // TODO: Rename and change types of parameters
@@ -126,7 +127,7 @@ public class Pomodoro extends Fragment {
     public void stopTimer() {
         countDownTimer.cancel();
         isTimerRunning = false;
-        countdownButton.setText("Stop");
+        countdownButton.setText("Resume");
     }
 
     public void updateTimer() {
