@@ -8,6 +8,20 @@
     android:scrollbars="vertical"
     tools:context=".Calendar">
 
+    <TextView
+        android:id="@+id/notesText3"
+        android:layout_width="157dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:includeFontPadding="false"
+        android:text="Calendar"
+        android:textColor="@color/colorDefaultNoteColor"
+        android:textSize="36sp"
+        app:fontFamily="@font/ubuntu_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <CalendarView
         android:id="@+id/taskCalendar"
         android:layout_width="wrap_content"
@@ -15,8 +29,10 @@
         android:foregroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/taskList"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/notesText3"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/taskList"

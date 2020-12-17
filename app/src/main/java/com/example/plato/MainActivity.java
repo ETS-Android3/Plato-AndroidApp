@@ -1,5 +1,7 @@
 package com.example.plato;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.navbar_calendar:
+                        // This code wipes the shared preferences on Calendar start for testing purposes
+                        SharedPreferences sharedPref = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.clear();
                         openFragment(new Calendar());
                         return true;
 
