@@ -15,6 +15,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="200dp"
         android:text="Study"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +27,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="325dp"
         android:text="Edit"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +39,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="450dp"
         android:text="Add"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,8 +51,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Flashcards"
-        android:textSize="50dp"
         android:textColor="@color/black"
+        android:textSize="36dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -2,11 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navbar_cards"
-        android:icon="@drawable/icon_flashcard"
-        android:title="Cards" />
-
-    <item
         android:id="@+id/navbar_calendar"
         android:icon="@drawable/icon_calendar"
         android:title="Calendar" />
@@ -15,6 +10,11 @@
         android:id="@+id/navbar_notes"
         android:icon="@drawable/icon_note"
         android:title="Notes" />
+
+    <item
+        android:id="@+id/navbar_cards"
+        android:icon="@drawable/icon_flashcard"
+        android:title="Cards" />
 
     <item
         android:id="@+id/navbar_pomodoro"

@@ -18,9 +18,9 @@
         android:id="@+id/shuffle"
         android:layout_width="100dp"
         android:layout_height="50dp"
+        android:layout_marginLeft="250dp"
         android:layout_marginTop="0dp"
         android:text="Shuffle"
-        android:layout_marginLeft="250dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
