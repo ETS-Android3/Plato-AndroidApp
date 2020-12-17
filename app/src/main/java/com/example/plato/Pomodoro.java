@@ -32,7 +32,10 @@ public class Pomodoro extends Fragment {
     private Button countdownButton;
     private CountDownTimer countDownTimer;
     private long timeLeft = (60000 * 25);
-    private boolean isTimerRunning;
+    private boolean isTimerRunning = false;
+    private boolean isTimerRunning2 = false;
+    private long timeLeft2 = (60000 * 5);
+    private CountDownTimer countDownTimer2;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -95,12 +98,21 @@ public class Pomodoro extends Fragment {
             startTimer();
     }
 
+    public void startStop2() {
+        if (isTimerRunning2) {
+            stopTimer2();
+        } else
+            startTimer2();
+    }
+
     public void startTimer() {
         countDownTimer = new CountDownTimer(timeLeft, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeft = millisUntilFinished;
                 updateTimer();
+                if ((((int) (timeLeft % 60000) / 1000) == 0) && ((int) (timeLeft / 60000) == 0))
+                    onFinish();
 //                String sDuration=String.format(Locale.ENGLISH, "%02d: %02d"
 //                , TimeUnit.MICROSECONDS.toMinutes(1)
 //                , TimeUnit.MILLISECONDS.toSeconds(1)-
@@ -111,8 +123,15 @@ public class Pomodoro extends Fragment {
 
             @Override
             public void onFinish() {
-                countdownText.setText("Work time Ended, break starts now :D");
-                updateTimer2();
+                countdownText.setText("Work Time Ended.");
+                try {
+                    Thread.sleep(12000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                timeLeft = (60000 * 25);
+                isTimerRunning2 = false;
+                startStop2();
 
 //                Toast.makeText(getApplicationContext(), "Countdown Timer has ended", Toast.LENGTH_LONG).show();
 
@@ -123,10 +142,53 @@ public class Pomodoro extends Fragment {
 
     }
 
+    public void startTimer2() {
+        countDownTimer2 = new CountDownTimer(timeLeft2, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeft2 = millisUntilFinished;
+                updateTimer2();
+                if ((((int) (timeLeft2 % 60000) / 1000) == 0) && ((int) (timeLeft2 / 60000) == 0))
+                    onFinish();
+//                String sDuration=String.format(Locale.ENGLISH, "%02d: %02d"
+//                , TimeUnit.MICROSECONDS.toMinutes(1)
+//                , TimeUnit.MILLISECONDS.toSeconds(1)-
+//                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
+//                countdownText.setText(sDuration);
+
+            }
+
+            @Override
+            public void onFinish() {
+                countdownText.setText("Break Time Ended.");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                timeLeft2 = (60000 * 5);
+                isTimerRunning = false;
+                startStop();
+
+//                Toast.makeText(getApplicationContext(), "Countdown Timer has ended", Toast.LENGTH_LONG).show();
+
+            }
+        }.start();
+        countdownButton.setText("Pause");
+        isTimerRunning2 = true;
+
+    }
+
     public void stopTimer() {
         countDownTimer.cancel();
         isTimerRunning = false;
-        countdownButton.setText("Stop");
+        countdownButton.setText("Start");
+    }
+
+    public void stopTimer2() {
+        countDownTimer2.cancel();
+        isTimerRunning2 = false;
+        countdownButton.setText("Start");
     }
 
     public void updateTimer() {
@@ -137,11 +199,13 @@ public class Pomodoro extends Fragment {
             timeLeftText += "0";
         timeLeftText += seconds;
         countdownText.setText(timeLeftText);
+
+
     }
 
     public void updateTimer2() {
-        int mins = (int) (timeLeft / 60000);
-        int seconds = (int) (timeLeft % 60000) / 1000;
+        int mins = (int) (timeLeft2 / 60000);
+        int seconds = (int) (timeLeft2 % 60000) / 1000;
         String timeLeftText = mins + ":";
         if (seconds < 10)
             timeLeftText += "0";
