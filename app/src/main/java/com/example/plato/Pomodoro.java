@@ -1,5 +1,6 @@
 package com.example.plato;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,10 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,12 +27,18 @@ public class Pomodoro extends Fragment {
     //variables for the timer
     private TextView countdownText;
     private Button countdownButton;
-    private CountDownTimer countDownTimer;
-    private long timeLeft = (60000 * 25);
-    private boolean isTimerRunning = false;
-    private boolean isTimerRunning2 = false;
-    private long timeLeft2 = (60000 * 5);
-    private CountDownTimer countDownTimer2;
+    private CountDownTimer workTimer;
+
+    private boolean startwork = true;
+    private boolean timerRunning = false;
+
+    private long workTime = 60000 * 25;
+    private long breakTime = 60000 * 5;
+
+//    private long workTime = 8000;
+//    private long breakTime = 4000;
+
+    private long countTime = workTime;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -82,8 +85,21 @@ public class Pomodoro extends Fragment {
         countdownButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startStop();
-
+                if(startwork == true && timerRunning == false) {
+                    timerRunning = true;
+                    countdownButton.setText("Pause");
+                    startTimer();
+                }
+                else if(startwork == false && timerRunning == false) {
+                    timerRunning = true;
+                    countdownButton.setText("Pause");
+                    startTimer();
+                }
+                else if (timerRunning = true){
+                    workTimer.cancel();
+                    timerRunning = false;
+                    countdownButton.setText("Resume");
+                }
             }
         });
         updateTimer();
@@ -91,125 +107,46 @@ public class Pomodoro extends Fragment {
         return view;
     }
 
-    public void startStop() {
-        if (isTimerRunning) {
-            stopTimer();
-        } else
-            startTimer();
-    }
-
-    public void startStop2() {
-        if (isTimerRunning2) {
-            stopTimer2();
-        } else
-            startTimer2();
-    }
-
     public void startTimer() {
-        countDownTimer = new CountDownTimer(timeLeft, 1000) {
+        workTimer = new CountDownTimer(countTime, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                timeLeft = millisUntilFinished;
+                countTime = millisUntilFinished;
                 updateTimer();
-                if ((((int) (timeLeft % 60000) / 1000) == 0) && ((int) (timeLeft / 60000) == 0))
-                    onFinish();
-//                String sDuration=String.format(Locale.ENGLISH, "%02d: %02d"
-//                , TimeUnit.MICROSECONDS.toMinutes(1)
-//                , TimeUnit.MILLISECONDS.toSeconds(1)-
-//                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
-//                countdownText.setText(sDuration);
-
             }
 
             @Override
             public void onFinish() {
-                countdownText.setText("Work Time Ended.");
-                try {
-                    Thread.sleep(12000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                countdownText.setTextSize(50);
+                if (startwork) {
+                    countdownText.setText("Work Time Ended.");
+                    countdownButton.setText("Start");
+                    timerRunning = false;
+                    countTime = breakTime;
+                    final MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.ding);
+                    mp.start();
                 }
-                timeLeft = (60000 * 25);
-                isTimerRunning2 = false;
-                startStop2();
-
-//                Toast.makeText(getApplicationContext(), "Countdown Timer has ended", Toast.LENGTH_LONG).show();
-
+                else if (!startwork){
+                    countdownText.setText("Break Time Ended.");
+                    countdownButton.setText("Start");
+                    timerRunning = false;
+                    countTime = workTime;
+                    final MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.ding);
+                    mp.start();
+                }
+                startwork = !startwork;
             }
         }.start();
-        countdownButton.setText("Pause");
-        isTimerRunning = true;
-
-    }
-
-    public void startTimer2() {
-        countDownTimer2 = new CountDownTimer(timeLeft2, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeLeft2 = millisUntilFinished;
-                updateTimer2();
-                if ((((int) (timeLeft2 % 60000) / 1000) == 0) && ((int) (timeLeft2 / 60000) == 0))
-                    onFinish();
-//                String sDuration=String.format(Locale.ENGLISH, "%02d: %02d"
-//                , TimeUnit.MICROSECONDS.toMinutes(1)
-//                , TimeUnit.MILLISECONDS.toSeconds(1)-
-//                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
-//                countdownText.setText(sDuration);
-
-            }
-
-            @Override
-            public void onFinish() {
-                countdownText.setText("Break Time Ended.");
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                timeLeft2 = (60000 * 5);
-                isTimerRunning = false;
-                startStop();
-
-//                Toast.makeText(getApplicationContext(), "Countdown Timer has ended", Toast.LENGTH_LONG).show();
-
-            }
-        }.start();
-        countdownButton.setText("Pause");
-        isTimerRunning2 = true;
-
-    }
-
-    public void stopTimer() {
-        countDownTimer.cancel();
-        isTimerRunning = false;
-        countdownButton.setText("Start");
-    }
-
-    public void stopTimer2() {
-        countDownTimer2.cancel();
-        isTimerRunning2 = false;
-        countdownButton.setText("Start");
     }
 
     public void updateTimer() {
-        int mins = (int) (timeLeft / 60000);
-        int seconds = (int) (timeLeft % 60000) / 1000;
+        int mins = (int) (countTime / 60000);
+        int seconds = (int) (countTime % 60000) / 1000;
         String timeLeftText = mins + ":";
         if (seconds < 10)
             timeLeftText += "0";
         timeLeftText += seconds;
-        countdownText.setText(timeLeftText);
-
-
-    }
-
-    public void updateTimer2() {
-        int mins = (int) (timeLeft2 / 60000);
-        int seconds = (int) (timeLeft2 % 60000) / 1000;
-        String timeLeftText = mins + ":";
-        if (seconds < 10)
-            timeLeftText += "0";
-        timeLeftText += seconds;
+        countdownText.setTextSize(105);
         countdownText.setText(timeLeftText);
     }
 }

@@ -25,7 +25,6 @@ public class Noise extends Fragment {
     private Button playBtn;
     private SeekBar positionBar, volumeBar;
     private TextView elapsedTimeLabel, remainingTimeLabel;
-    private MediaPlayer mp;
     private int totalTime;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -78,15 +77,30 @@ public class Noise extends Fragment {
         View view = inflater.inflate(R.layout.fragment_noise, container, false);
 
         playBtn = view.findViewById(R.id.playBtn);
+        playBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (!MainActivity.mp.isPlaying()) {
+                    // Stopping
+                    MainActivity.mp.start();
+                    playBtn.setBackgroundResource(R.drawable.stop);
+
+                } else {
+                    // Playing
+                    MainActivity.mp.pause();
+                    playBtn.setBackgroundResource(R.drawable.play);
+                }
+            }
+        });
         elapsedTimeLabel = view.findViewById(R.id.elapsedTimeLabel);
         remainingTimeLabel = view.findViewById(R.id.remainingTimeLabel);
 
         // Media Player
-        mp = MediaPlayer.create(this.getActivity(), R.raw.song);
-        mp.setLooping(true);
-        mp.seekTo(0);
-        mp.setVolume(5f, 5f);
-        totalTime = mp.getDuration();
+        MainActivity.mp = MediaPlayer.create(this.getActivity(), R.raw.song);
+        MainActivity.mp.setLooping(true);
+        MainActivity.mp.seekTo(0);
+        MainActivity.mp.setVolume(5f, 5f);
+        totalTime = MainActivity.mp.getDuration();
 
         // Position Bar
         positionBar = view.findViewById(R.id.positionBar);
@@ -96,7 +110,7 @@ public class Noise extends Fragment {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                         if (fromUser) {
-                            mp.seekTo(progress);
+                            MainActivity.mp.seekTo(progress);
                             positionBar.setProgress(progress);
                         }
                     }
@@ -118,7 +132,7 @@ public class Noise extends Fragment {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                         float volumeNum = progress / 50f;
-                        mp.setVolume(volumeNum, volumeNum);
+                        MainActivity.mp.setVolume(volumeNum, volumeNum);
                     }
 
                     @Override
@@ -135,10 +149,10 @@ public class Noise extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (mp != null) {
+                while (MainActivity.mp != null) {
                     try {
                         Message msg = new Message();
-                        msg.what = mp.getCurrentPosition();
+                        msg.what = MainActivity.mp.getCurrentPosition();
                         handler.sendMessage(msg);
                         Thread.sleep(1000);
                     } catch (InterruptedException ignored) {}
@@ -177,19 +191,5 @@ public class Noise extends Fragment {
         timeLabel += sec;
 
         return timeLabel;
-    }
-
-    public void playBtnClick(View view) {
-
-        if (!mp.isPlaying()) {
-            // Stopping
-            mp.start();
-            playBtn.setBackgroundResource(R.drawable.stop);
-
-        } else {
-            // Playing
-            mp.pause();
-            playBtn.setBackgroundResource(R.drawable.play);
-        }
     }
 }

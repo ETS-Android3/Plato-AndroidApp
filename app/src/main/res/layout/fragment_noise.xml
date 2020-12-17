@@ -9,6 +9,23 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingTop="16dp">
+        <TextView
+            android:id="@+id/notesText"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:includeFontPadding="false"
+            android:text="Noise"
+            android:textColor="@color/colorDefaultNoteColor"
+            android:textSize="36sp"
+            app:fontFamily="@font/ubuntu_bold"
+            android:gravity="left"/>
+    </LinearLayout>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,23 +66,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="40dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:src="@drawable/sound"/>
+            android:src="@drawable/sound" />
+
         <SeekBar
             android:id="@+id/volumeBar"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:progress="50"
-            android:max="100"/>
+            android:max="100"
+            android:progress="50" />
+
         <ImageView
             android:layout_width="26dp"
             android:layout_height="26dp"
-            android:src="@drawable/sound2"/>
+            android:src="@drawable/sound2" />
     </LinearLayout>
 
 </LinearLayout>

@@ -2,7 +2,9 @@ package com.example.plato;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 
 import com.example.plato.activities.Notes;
@@ -16,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ADD_NOTE = 1;
+    public static MediaPlayer mp = new MediaPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +31,12 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.navbar_cards:
+                        mp.reset();
                         openFragment(new Flashcards());
                         return true;
 
                     case R.id.navbar_calendar:
+                        mp.reset();
                         // This code wipes the shared preferences on Calendar start for testing purposes
                         SharedPreferences sharedPref = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPref.edit();
@@ -40,14 +45,17 @@ public class MainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.navbar_pomodoro:
+                        mp.reset();
                         openFragment(new Pomodoro());
                         return true;
 
                     case R.id.navbar_notes:
+                        mp.reset();
                         openFragment(new Notes());
                         return true;
 
                     case R.id.navbar_noise:
+                        mp.reset();
                         openFragment(new Noise());
                         return true;
                 }
