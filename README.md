@@ -5,7 +5,7 @@ Plato is a study application for Android phones, with the objective of providing
 The application is divided into 5 segments, each with their own specific purpose:
 
 ### Calendar (Nathan Adams)
-The Calendar page downloads, parses, and formats events from a user-provided .ical link from the user's Calendar tab on Canvas, and stores the event data in the app's preferences using SharedPreferences. The user is able to select a specific date on the CalendarView, and the events on that day are formatted into event items and are displayed in a RecyclerView situated below the CalendarView.
+The Calendar page downloads, parses, and formats events from a user-provided .ical link from the user's Calendar tab on Canvas. The calendar data from the .ical link is parsed with iCal4j, and stored in the app's preferences using SharedPreferences. The user is able to select a specific date on the CalendarView, and the events on that day are formatted into event items and are displayed in a RecyclerView situated below the CalendarView.
 ### Notes (Kruti Patel)
 The Notes page allows the user to view, create, edit, delete, and search notes. Each individual note has a title, body, creation date, and color, with title, body, and color being editable after the note's creation. Note data is stored and retrieved using the Room library, and the library can be searched via the search bar above the note display area.
 ### Cards (Aditya Yadav)
